@@ -1,0 +1,13 @@
+{
+  "name": "bootstrap-dropdown-filter",
+  "version": "0.0.1",
+  "main": "bootstrap-dropdown-filter.js",
+  "ignore": [
+    ".jshintrc",
+    "**/*.txt"
+  ],
+  "dependencies": {
+    "diacritic": "~0.0.3",
+    "bootstrap": "~3.3.4"
+  }
+}
