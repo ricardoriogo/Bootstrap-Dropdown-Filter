@@ -15,6 +15,8 @@
 	$.fn.bsDropDownFilter = function(options) {
 
 		return this.filter(".dropdown-menu").each(function() {
+			var $this, $li, $search, $droplist;
+			
 			$this = $(this).css({
 				'overflow-x': 'auto',
 				'max-height': 450
@@ -45,6 +47,7 @@
 	// Create a FILTER pseudo class. Like CONTAINS, but case insensitive
 	$.expr[":"].filter = $.expr.createPseudo(function(arg) {
 		return function( elem ) {
+			/*global Diacritics*/
 			return Diacritics.clean($(elem).text()).toUpperCase().indexOf(Diacritics.clean(arg).toUpperCase()) >= 0;
 		};
 	});
