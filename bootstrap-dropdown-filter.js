@@ -21,7 +21,11 @@
 			});
 
 			$this.parent().on('shown.bs.dropdown', function(e){
-				$(this).find('.dropdown-filter input').focus();
+				$this = $(this);
+				$this.find('.dropdown-filter input').focus();
+				$this.find('li').show();
+			}).on('hide.bs.dropdown', function(e){
+				$(this).find('.dropdown-filter input').val('');
 			});
 
 			$li = $('<li role="presentation" class="dropdown-filter"></li>').prependTo($this);
