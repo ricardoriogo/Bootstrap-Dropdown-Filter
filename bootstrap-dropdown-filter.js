@@ -5,22 +5,25 @@
  *
  * @todo Navigation with the keyboard Up and Down
  * @todo Display Not Found msg to user
- * @todo Translate for other languages
  * ------------------------------------------------------
  * @done Auto-focus on input when dropdown is opened
  * @done Add scrollbar to large lists
+ * @done Set the input placeholder label by HTML data-filter-label attribute or plugin option
  */
 (function( $ ) {
 
 	$.fn.bsDropDownFilter = function(options) {
 
 		return this.filter(".dropdown-menu").each(function() {
+			var opts = $.extend( {}, $.fn.bsDropDownFilter.defaults, options);
 			var $this, $li, $search, $droplist;
 			
 			$this = $(this).css({
 				'overflow-x': 'auto',
 				'max-height': 450
 			});
+			
+			opts.label = $this.data('filter-label') || opts.label;
 
 			$this.parent().on('shown.bs.dropdown', function(e){
 				$this = $(this);
@@ -32,7 +35,7 @@
 
 			$li = $('<li role="presentation" class="dropdown-filter"></li>').prependTo($this);
 
-			$search = $('<input type="search" class="form-control" placeholder="Filtrar por:" style="width:96%; margin:0 auto" />')
+			$search = $('<input type="search" class="form-control" placeholder="' + opts.label + '" style="width:96%; margin:0 auto" />')
 				.data('dropdownList', $this)
 				.bind('click', function(e){
 					e.stopPropagation();
@@ -44,6 +47,10 @@
 				})
 				.prependTo($li);
 		});
+	};
+	
+	$.fn.bsDropDownFilter.defaults = {
+		label: 'Filter by:'
 	};
 
 	$('[data-filter], .dropdown-filter').bsDropDownFilter();
